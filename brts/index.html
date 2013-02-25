@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Ahmedabad BRTS Fare Chart</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href="./styles/jquery.mobile-1.2.0.min.css" />
+	<script src="./scripts/jquery-1.8.2.min.js"></script>
+	<script src="./scripts/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="fcalc.js"></script>
+</head> 
+<body>
+<script type="text/javascript">
+	$('#page1').live('pageshow',function(event, ui){
+		start();
+	});
+    </script>
+
+<!-- Start of first page -->
+<div data-role="page" id="page1" >
+
+	<div data-role="header">
+		<h1>Ahmedabad BRTS Fare Chart</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+		<form id="form1" data-ajax="false">
+				<fieldset>
+		<div data-role="fieldcontain">
+			<label for="ca" class="select">Source:</label>
+			<select name="ca" id="ca" onchange="calc();">
+				<option  value="0" selected="selected">AJIT Mill</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="cb" class="select">Destination:</label>
+			<select name="cb" id="cb" onchange="calc();">
+				<option  value="0" selected="selected">AJIT Mill</option>
+			</select>
+		</div>
+		<div id="m" name="m" style="text-decoration:blink; font-weight:bold; color:Red; font-size:larger;">
+                0 Rupees
+        </div>
+
+		</fieldset>
+		</form>
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+		<h4>Developed By: Ankur Shah</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>

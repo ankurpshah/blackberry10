@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+		xmlns:rim="http://www.blackberry.com/ns/widgets"
+		version="2.0.0.0" id="registercolorcode">
+
+	<author email="ankurpshah@gmail.com" rim:copyright="Copyright 1998-2013">Ankur Shah</author>
+
+	<name>Registor color Code</name>
+
+	<description>Registor color Code.</description>
+
+	<rim:permissions>
+	</rim:permissions>
+
+	<content src="index.html" rim:allowInvokeParams="true"/>
+
+	<access subdomains="true" uri="*" />
+</widget>

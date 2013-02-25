@@ -1,0 +1,187 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>BMI Calculator</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href="./styles/jquery.mobile-1.2.0.min.css" />
+	<script src="./scripts/jquery-1.8.2.min.js"></script>
+	<script src="./scripts/jquery.mobile-1.2.0.min.js"></script>
+	<style type="text/css"> 
+    table {
+		color: black;
+		background: #fff;
+		border: 1px solid #b4b4b4;
+		font: bold 17px helvetica;
+		padding: 0;
+		margin-top:10px;
+		width: 100%;
+		-webkit-border-radius: 8px;
+	}
+    table caption { text-align:left;  }
+    table thead tr th { background:#000; color:#fff; text-align:left; border-bottom-width:1px; border-top-width:1px; }
+	table tr td {
+		text-align:left;
+		color: #666;
+		border-bottom: 1px solid #b4b4b4;
+		border-right: 1px solid #b4b4b4;
+		padding: 10px 10px 10px 10px;
+		background-image: -webkit-linear-gradient(top, #fdfdfd, #eee);
+	}
+
+	table tr th {
+		text-align:left;
+		color: #666;
+		border-bottom: 1px solid #b4b4b4;
+		border-right: 1px solid #b4b4b4;
+		padding: 10px 10px 10px 10px;
+		background-image: -webkit-linear-gradient(top, #fdfdfd, #eee);
+	}
+         
+	</style>
+	
+</head> 
+<body>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		showMetric();
+		$( "#method" ).bind( "change", function(event, ui) {
+			var methodVal=$("#method").val();
+			if(methodVal == "english") {
+				showEnglish();
+			}
+			else {
+				showMetric();
+			}
+		});
+		$( "#weight" ).change(function(event, ui) {
+			var methodVal=$("#method").val();
+			if(methodVal == "english") {
+				$("#result").html("BMI index: " + calcEnglishBMI($("#weight").val(),$("#height").val()));
+			}
+			else {
+				$("#result").html("BMI index: " + calcMetricBMI($("#weight").val(),$("#height").val()));
+			}
+		});
+		$( "#height" ).change(function(event, ui) {
+			var methodVal=$("#method").val();
+			if(methodVal == "english") {
+				$("#result").html("BMI index: " + calcEnglishBMI($("#weight").val(),$("#height").val()));
+			}
+			else {
+				$("#result").html("BMI index: " + calcMetricBMI($("#weight").val(),$("#height").val()));
+			}
+		});
+	});
+	
+	function showMetric() {
+		$("#wlabel").text("Weight(kgs):");
+		$("#hlabel").text("Height(centimeters):");
+		$("#height").attr("min",1).attr("max",300);
+		$("#weight").attr("min",1).attr("max",200);
+		$("#height").val(160).slider("refresh");
+		$("#weight").val(80).slider("refresh");
+		$("#result").html("BMI index: " + calcMetricBMI($("#weight").val(),$("#height").val()));
+	}
+	
+	function showEnglish() {
+		$("#wlabel").text("Weight(lbs):");
+		$("#hlabel").text("Height(inches):");
+		$("#height").attr("min",1).attr("max",120);
+		$("#weight").attr("min",1).attr("max",400);
+		$("#height").val(66).slider("refresh");
+		$("#weight").val(180).slider("refresh");
+		$("#result").html("BMI index: " + calcEnglishBMI($("#weight").val(),$("#height").val()));
+	}
+	
+	function calcMetricBMI(weight, height) {
+		return ((weight * 100 * 100)/(height * height)).toFixed(2);
+	}
+	
+	function calcEnglishBMI(weight, height) {
+		return ((weight * 703)/(height * height)).toFixed(2);
+	}
+</script>
+
+
+<!-- Start of first page -->
+<div data-role="page" id="foo" >
+
+	<div data-role="header">
+		<h1>BMI Calculator</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<fieldset>
+			<div data-role="fieldcontain">
+				<label for="method">Method:</label>
+				<select name="method" id="method" data-role="slider" data-theme="a">
+					<option value="metric">Metric</option>
+					<option value="english">English</option>
+				</select> 
+			</div>
+			<div data-role="fieldcontain">
+				<label id="wlabel" for="weight">Weight(kgs):</label>
+				<input type="range" name="weight" id="weight" value="60" min="1" max="200" data-highlight="true"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label id="hlabel" for="height">Height(inches):</label>
+				<input type="range" name="height" id="height" value="150" min="1" max="300" data-highlight="true"/>
+			</div>
+		</fieldset>
+		<div id="result" name="result" style="text-decoration:blink; font-weight:bold; color:Red; font-size:larger;">
+        </div>
+		<br/>
+		<table summary="BMI Chart"> 
+			<caption>BMI Chart</caption> 
+			<thead> 
+				<tr> 
+					<th scope="col">Category</th>  
+					<th scope="col">BMI range</th>  
+				</tr> 
+			</thead> 
+			<tbody>
+				<tr> 
+					<th scope="row">Very severely underweight</th> 
+					<td>less than 15</td> 
+				</tr> 
+				<tr> 
+					<th scope="row">Severely underweight</th> 
+					<td>from 15.0 to 16.0</td> 
+				</tr> 
+				<tr> 
+					<th scope="row">Underweight</th> 
+					<td>from 16.0 to 18.5</td> 
+				</tr>
+				<tr> 
+					<th scope="row">Normal (healthy weight)</th> 
+					<td>from 18.5 to 25</td> 
+				</tr> 
+				<tr> 
+					<th scope="row">Overweight</th> 
+					<td>from 25 to 30</td> 
+				</tr> 
+				<tr> 
+					<th scope="row">Obese Class I (Moderately obese)</th> 
+					<td>from 30 to 35</td> 
+				</tr>
+				<tr> 
+					<th scope="row">Obese Class II (Severely obese)</th> 
+					<td>from 35 to 40</td> 
+				</tr> 
+				<tr> 
+					<th scope="row">Obese Class III (Very severely obese)</th> 
+					<td>over 40</td> 
+				</tr> 
+			</tbody> 
+		</table>
+		
+	</div><!-- /content -->
+	<div data-role="footer" data-position="fixed">
+		<h4>Developed By: Ankur Shah</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>

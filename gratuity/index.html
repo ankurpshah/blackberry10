@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>Gratuity Calculator</title> 
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href="./styles/jquery.mobile-1.2.0.min.css" />
+	<script src="./scripts/jquery-1.8.2.min.js"></script>
+	<script src="./scripts/jquery.mobile-1.2.0.min.js"></script>
+</head> 
+<body>
+<script type="text/javascript">
+	$('#page1').live('pageshow',function(event, ui){
+		displayDetails(Number($("#basic").val()),Number($("#da").val()),Number($("#months").val()));
+		$( "#basic" ).change(function(event, ui) {
+			displayDetails(Number($("#basic").val()),Number($("#da").val()),Number($("#months").val()));
+		});
+		$( "#da" ).change(function(event, ui) {
+			displayDetails(Number($("#basic").val()),Number($("#da").val()),Number($("#months").val()));
+		});
+		$( "#months" ).change(function(event, ui) {
+			displayDetails(Number($("#basic").val()),Number($("#da").val()),Number($("#months").val()));
+		});
+	});
+	
+	function displayDetails(basic, da, months) {
+		var numberOfYears=toInteger((months/12));
+		console.log("Deno : " + ( (basic + da) * 15 * numberOfYears));
+		var gratuityVal=(( (basic + da) * 15 * numberOfYears) / 26).toFixed(2);
+		var resultStr="Basic Pay : " + basic +"<br/>Dearness Allowance : " + da + "<br/>number of years : " + numberOfYears + "<br/>Gratuity Amount : " + gratuityVal; 
+		$("#result").html(resultStr);
+	}
+	
+	function isNumber(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+	
+	function toInteger(number){ 
+		return Math.round(  // round to nearest integer
+			Number(number)    // type cast your input
+		); 
+	};
+</script>
+
+<!-- Start of first page -->
+<div data-role="page" id="page1" >
+
+	<div data-role="header">
+		<h1>Gratuity Calculator</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div style="margin:0px; border:Solid 1px black;">
+			<p align="justify" style="text-align: justify; margin:0px; font-weight:bold;">
+				Gratuity Eligibility:
+			</p>
+			<hr/>
+			<p align="justify">
+				Any person employed on wages/salary.
+			</p>
+			<p align="justify">
+				At the time of retirement or resignation or on superannuation, an employee should have rendered continuous service of not less than five years.
+			</p>
+			<p align="justify">
+				Payable without completion of five years only when death and disablement.
+			</p>
+			<p align="justify">
+				This gratuity calculator is applicable only for indian employee.
+			</p>
+			<p align="justify">
+				If employee completes more than 6 months in an year then it considers as full year.
+			</p>
+		</div>
+		<fieldset>
+			<div data-role="fieldcontain">
+				<label for="basic">Basic Pay:</label>
+				<input type="range" name="basic" id="basic" value="25000" min="1" max="200000" data-highlight="true"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="da">Dearness Allowance:</label>
+				<input type="range" name="da" id="da" value="10000" min="1" max="100000" data-highlight="true"/>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="months">Months completed:</label>
+				<input type="range" name="months" id="months" value="60" min="1" max="400" data-highlight="true"/>
+			</div>
+		</fieldset>
+		<div id="result" name="result" style="text-decoration:blink; font-weight:bold; color:Red; font-size:larger;">
+        </div>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed">
+		<h4>Developed By: Ankur Shah</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>
